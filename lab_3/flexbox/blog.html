@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Gallery with Flexbox</title>
+        <link rel="stylesheet" href="../styles/flexbox-style.css">
+    </head>
+    <body>
+        <header id="PageHeader">
+         <img src="./images/the-blog.jpg" alt="" id="SiteLogo" >
+         <h1 id="SiteTitle">The Blog</h1>
+        </header>
+
+        <nav id="SiteNavigation"> 
+          <ul class="flex-container">
+            <li><a href="#">Home</a></li>         
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>     
+          </ul>                                 
+         </nav>
+
+         <!-- Main Content Section -->
+       <section id="PageContent" >
+
+         <!-- Left: Main Image -->
+         <div class="content" class="flex-container">
+          <div id="main-image">
+           <img src="./images/sunset.jpg" alt="Sunset">
+           </div>
+           <div id="image-details">
+              <p id="first-para">This paragraph will be bold-faced</p>
+           </div>
+      </div>
+
+         <aside id="sideber" class="flex=container">   
+            <div id="thumbnails" class="flex-container">
+                <img src="./images/thumb1.jpg" alt="Mountain peaks during sunset">
+                <img src="./images/thumb2.jpg" alt="Calm lake during sunset">
+                <img src="./images/thumb3.jpg" alt="Close-up of a pink and white flower">
+                <img src="./images/thumb4.jpg" alt="Field of wildflowers with trees in background">
+                <img src="./images/thumb5.jpg" alt="Purple flowers in bloom">
+                <img src="./images/thumb6.jpg" alt="Daisy flowers in a field">
+                <img src="./images/thumb7.jpg" alt="Single white daisy on a grassy field">
+                <img src="./images/thumb8.jpg" alt="Close-up of white daisy flower">
+                <img src="./images/thumb9.jpg" alt="Purple and white flower in bloom">
+                <img src="./images/thumb10.jpg" alt="Orange flower with green background">
+                <img src="./images/thumb11.jpg" alt="Close-up of a pink flower">
+                <img src="./images/thumb12.jpg" alt="Close-up of vibrant magenta and purple flowers">
+            </div>
+          
+         
+         <!-- Image Comments Section -->
+         <div id="image-comment"> 
+          <h3>Comments</h3>
+          <div class="image-comments">
+            
+            <p><strong>Alice:</strong> This is a breathtaking view! I love the way the sunset reflects on the water.
+            </p>
+            <p><strong>John:</strong> Absolutely beautiful! The lighting in this photo is incredible.</p>
+            <p><strong>Sarah:</strong> I've always wanted to visit this city. Your photography really brings it to
+                life!</p>  
+            <p><strong>Sarah:</strong> I've always wanted to visit this city. Your photography really brings it to
+                  life!</p> 
+             <p><strong>Sarah:</strong> I've always wanted to visit this city. Your photography really brings it to
+                    life!</p>               
+           </div>
+         </div>
+         </aside>
+        </section>
+        <footer id="PageFooter">
+          <a href="#"> Legal Stuff</a>
+        </footer>
+
+    </body>
+</html>
