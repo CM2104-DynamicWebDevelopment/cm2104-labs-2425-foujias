@@ -1,3 +1,4 @@
+
 var express = require('express'); 
 var app = express(); 
 app.get('/', function(req, res){ 
@@ -7,6 +8,7 @@ app.get('/', function(req, res){
 app.get('/', function(req, res){ 
     res.send("Hello world! by express"); 
    }); 
+<<<<<<< Updated upstream
 
 app.get('/test', function(req, res){ 
     res.send("this is route 2"); 
@@ -21,4 +23,5 @@ app.get('/add', function(req, res){
 app.listen(8080);
 
 
-      
+
+
