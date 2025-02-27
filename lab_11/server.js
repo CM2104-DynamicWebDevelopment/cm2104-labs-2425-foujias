@@ -8,7 +8,6 @@ app.get('/', function(req, res){
 app.get('/', function(req, res){ 
     res.send("Hello world! by express"); 
    }); 
-<<<<<<< Updated upstream
 
 app.get('/test', function(req, res){ 
     res.send("this is route 2"); 
