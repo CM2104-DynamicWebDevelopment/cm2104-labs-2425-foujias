@@ -62,9 +62,19 @@ var quest = req.query.quest;
 });
 
 
+// to create a new route for a post request
+app.post('/postform', function(req, res){ 
+var name = req.body.name; 
+var quest = req.body.quest; 
+ res.send("Hi "+name+" I am sure you will "+quest) ; 
+});
 
 
-app.use(express.static('public'))    
+
+app.use(express.static('public')) 
+
+// parse the form data to be readable
+app.use(express.urlencoded({extended:true}))   
 
 app.listen(8080);
 
