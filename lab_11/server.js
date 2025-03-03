@@ -1,31 +1,31 @@
 
 var express = require('express'); 
 var app = express(); 
+
 app.get('/', function(req, res){ 
  res.send("Hello world! by express");
 });
 
-app.get('/', function(req, res){ 
-    res.send("Hello world! by express"); 
-   }); 
-
+//Route 2
 app.get('/test', function(req, res){ 
     res.send("this is route 2"); 
    });
    
+//query parameters
 app.get('/add', function(req, res){ 
-    var x = req.query.x; 
-    var y = req.query.y; 
+    var x = parseInt(req.query.x); 
+    var y = parseInt(req.query.y); 
      res.send("X + Y="+(x+y)); 
     }); 
 
+    //Route calc
 
-    // New /calc route
-app.get('/calc', function(req, res){ 
+    app.get('/calc', function(req, res){ 
     var x = parseFloat(req.query.x); 
     var y = parseFloat(req.query.y);  
     var operator = req.query.operator;
 
+    // Check if x and y are valid numbers
     if (isNaN(x) || isNaN(y)) {
         return res.send("Error: Please provide valid numbers for x and y.");
     }
@@ -53,6 +53,10 @@ app.get('/calc', function(req, res){
 
     res.send(`Result: ${result}`);
 });
+
+
+
+    
 
 
 app.get('/getform', function(req, res){ 
