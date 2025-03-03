@@ -7,6 +7,7 @@ app.get('/', function(req, res){
  res.send("Hello world! by express");
 });
 
+
 //Route 2
 app.get('/test', function(req, res){ 
     res.send("this is route 2"); 
@@ -58,8 +59,6 @@ app.get('/add', function(req, res){
 
 
     
-
-
 app.get('/getform', function(req, res){ 
 var name = req.query.name; 
 var quest = req.query.quest; 
@@ -85,4 +84,9 @@ app.listen(8080);
 
 
 
+app.get('/', function(req, res){ 
+    res.send("Hello world! by express"); 
+   }); 
+
+app.listen(8080);
 
