@@ -2,6 +2,7 @@
 var express = require('express'); 
 var app = express(); 
 
+//Route 1
 app.get('/', function(req, res){ 
  res.send("Hello world! by express");
 });
