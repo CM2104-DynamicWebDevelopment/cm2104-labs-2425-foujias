@@ -2,6 +2,10 @@
 var express = require('express'); 
 var app = express(); 
 
+
+// lab11 page 12
+app.use(express.static('public')) 
+
 //Route 1
 app.get('/', function(req, res){ 
  res.send("Hello world! by express");
@@ -58,7 +62,8 @@ app.get('/add', function(req, res){
 
 
 
-    
+
+//lab11 page 14    
 app.get('/getform', function(req, res){ 
 var name = req.query.name; 
 var quest = req.query.quest; 
@@ -73,15 +78,14 @@ var quest = req.body.quest;
  res.send("Hi "+name+" I am sure you will "+quest) ; 
 });
 
-
-
-app.use(express.static('public')) 
+app.get('/user/:userID/books/:bookID', function(req, res){ 
+var userID = req.params.userID; 
+var bookID = req.params.bookID; 
+res.send("Hi "+userID+" you want to book "+bookID) ; 
+});
 
 // parse the form data to be readable
 app.use(express.urlencoded({extended:true}))   
-
-app.listen(8080);
-
 
 
 app.get('/', function(req, res){ 
