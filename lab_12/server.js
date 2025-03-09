@@ -3,7 +3,8 @@ var express = require('express');
 var app = express();
  app.use(express.static('public'))
  app.get('/', function(req, res){
- res.send("Hello world! by express");
+ //res.send("Hello world! by express");
+ res.sendFile(__dirname+"/public/form.html")
  });
 
 
@@ -13,10 +14,18 @@ app.get('/searchLove', function (req, res) {
 });
 
 
+//route for searching in tracks, artists and albums 
+app.get('/search', function (req, res) { 
+ var searchterm = req.query.searchterm; 
+ getTracks(searchterm, res); 
+}); 
+
+
 var SpotifyWebApi=require('spotify-web-api-node');
 app.use(express.static('public'))
 
 var spotifyApi = new SpotifyWebApi ({
+
     clientId:'ce49c9b47cec4aa48285ce2e2cda1e60',
     clientSecret:'f12897e53fe0464dbee99217de7968b2'
 
@@ -40,15 +49,32 @@ spotifyApi.clientCredentialsGrant().then(
 ); 
 
 
-
-
 async function getTracks(searchterm, res) { 
  spotifyApi.searchTracks(searchterm) 
  .then(function (data) { 
- res.send(JSON.stringify(data.body)); 
+ var tracks = data.body.tracks.items 
+ //lets set up a empty string to act as the response 
+ var HTMLResponse = ""; 
+ //now lets run through all the items 
+ //this is a for loop 
+ for(var i=0; i<tracks.length;i++){ 
+ 
+ var track = tracks[i]; 
+ console.log(track.name); 
+ HTMLResponse = HTMLResponse + 
+ "<div>" + 
+ "<h2>"+track.name+"</h2>"+ 
+ "<h4>"+track.artists[0].name+"</h4>"+ 
+ "<img src='"+track.album.images[0].url +"'>"+ 
+ "<a href='"+track.external_urls.spotify+"'> Track Details </a>"+ 
+ "</div>"; 
+ console.log(HTMLResponse); 
+ } 
+ res.send(HTMLResponse) 
  }, function (err) { 
  console.error(err); 
- }); 
+ });
 }
+
 
 app.listen(8080);
