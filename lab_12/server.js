@@ -28,6 +28,28 @@ app.get('/topTracks/:artistId', function(req, res){
 })
 
 
+// Route to fetch related artists for a given artist ID
+app.get('/relatedArtists/:artistId', function(req, res) {
+    // Extract the artistId from the request parameters
+    var artistId = req.params.artistId;
+    
+    // Call the getRelated function to retrieve and send related artists
+    getRelated(artistId, res);
+});
+
+
+
+// Route to search for tracks using a query parameter
+app.get('/searchAPI', function (req, res) {
+    // Extract the search term from the query string (?searchterm=...)
+    var searchterm = req.query.searchterm;
+    
+    // Call the getTracks function to fetch track data from Spotify
+    getTracks(searchterm, res);
+});
+
+
+
 
 var SpotifyWebApi=require('spotify-web-api-node');
 app.use(express.static('public'))
@@ -114,6 +136,88 @@ async function getTopTracks(artistId, res) {
            res.send("<div class='container'><div class='alert alert-danger'>Error getting top tracks: " + err.message + "</div></div>");
        });
 }
+
+
+
+async function getRelated(artistId, res) {
+    // Call the Spotify API to get related artists
+    spotifyApi.getArtistRelatedArtists(artistId)
+        .then(function (data) {
+            var artists = data.body.artists; // Extract related artists from the response
+            
+            // Start building the HTML response
+            var HTMLResponse = "<div class='container'>";
+            HTMLResponse += "<h1>Related Artists</h1>";
+            HTMLResponse += "<a href='javascript:history.back()' class='btn btn-secondary mb-3'>Back to Search</a>";
+            HTMLResponse += "<div class='row'>";
+
+            // Loop through each related artist and add their details to the HTML response
+            for (var i = 0; i < artists.length; i++) {
+                var artist = artists[i];
+
+                HTMLResponse +=
+                    "<div class='col-md-4 mb-4'>" +
+                    "<div class='card'>" +
+                    // Check if the artist has an image, otherwise use a placeholder
+                    "<img src='" + (artist.images.length > 0 ? artist.images[0].url : 'https://via.placeholder.com/150') + 
+                    "' class='card-img-top' alt='" + artist.name + "'>" +
+                    "<div class='card-body'>" +
+                    "<h5 class='card-title'>" + artist.name + "</h5>" +
+                    // Display the number of followers, formatted with commas
+                    "<p class='card-text'>Followers: " + artist.followers.total.toLocaleString() + "</p>" +
+                    // Link to the artist's Spotify page
+                    "<a href='" + artist.external_urls.spotify + "' class='btn btn-success' target='_blank'>View on Spotify</a>" +
+                    "</div></div></div>";
+            }
+
+            HTMLResponse += "</div></div>"; // Close the row and container divs
+            res.send(HTMLResponse); // Send the HTML response to the client
+        })
+        .catch(function (err) {
+            console.log('Something went wrong!', err);
+            // Send a user-friendly error message to the client
+            res.send("<div class='container'><div class='alert alert-danger'>Error fetching related artists: " + err.message + "</div></div>");
+        });
+}
+
+
+
+async function getTracksAPI(searchterm, res) { 
+ spotifyApi.searchTracks(searchterm) 
+ .then(function (data) { 
+ //first lets get the tracks. 
+ //these are stored in the 
+ //JSON under an array called Items 
+ var tracks = data.body.tracks.items 
+ //lets set up a empty json array 
+//to act as the response 
+ var JSONResponse = []; 
+ //now lets run through all the items 
+ //this is a for loop 
+//(you could use a for each loop if you like.) 
+ for(var i=0; i<tracks.length;i++) 
+ { 
+ var track = tracks[i]; 
+//here we push the details we need about 
+//this track to the array 
+ JSONResponse.push( 
+ { 
+ trackname:track.name, 
+ artist:track.artists[0].name, 
+ image:track.album.images[0].url, 
+ url:track.external_urls.spotify, 
+ } 
+ ); 
+ } 
+ res.send(JSONResponse) 
+ }, function (err) { 
+ console.error(err); 
+ }); 
+} 
+
+
+
+
 
 
 
