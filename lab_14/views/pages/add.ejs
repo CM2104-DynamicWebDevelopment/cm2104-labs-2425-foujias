@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('../partials/head') %>
+ <title>Add Quotes Form</title>
+</head>
+<body class="container">
+<header>
+ <%- include('../partials/header') %>
+</header>
+ <h1>Add some quotes!</h1>
+ <form action="/quotes" method="POST">
+ <input type="text" placeholder="name" name="name">
+ <input type="text" placeholder="quote" name="quote">
+ <button type="submit">Submit</button>
+ </form>
+ <footer>
+ <%- include('../partials/footer') %>
+</footer>
+</body>
+</html>
