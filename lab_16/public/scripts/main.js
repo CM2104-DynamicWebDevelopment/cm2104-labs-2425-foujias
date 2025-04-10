@@ -18,3 +18,9 @@ $('#form').submit(function () {
  } 
  return false; 
  })
+
+//DISPLAYING THE MESSAGES ON THE CLIENT
+ socket.on('chat message', function(msg) { 
+ $('#messages').append("<li>"+msg+"</li>"); 
+ window.scrollTo(0, document.body.scrollHeight); 
+}); 
