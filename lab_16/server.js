@@ -20,7 +20,7 @@ http.listen(8080, function(){
 
 
 
-//page 15
+//TESTING DISCONNECT page 13 
 io.on('connection', function (socket) { 
  console.log('a user connected'); 
  socket.on('disconnect', function () { 

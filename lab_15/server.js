@@ -52,7 +52,7 @@ async function connectDB() {
 
 //********** GET ROUTES - Deal with displaying pages ***************************
 
-//this is our root route
+/*//this is our root route
 app.get('/', function(req, res) {
   //if the user is not logged in redirect them to the login page
   if(!req.session.loggedin){res.redirect('/login');return;}
@@ -66,7 +66,29 @@ app.get('/', function(req, res) {
     })
   });
 
+});*/
+
+// new code for update
+app.get('/', function(req, res) {
+  if (!req.session.loggedin) { res.redirect('/login'); return; }
+
+  db.collection('people').find().toArray(function(err, result) {
+    if (err) throw err;
+
+    // Look up the currently logged-in user's full profile
+    db.collection('people').findOne({ "login.username": req.session.username }, function(err, currentUser) {
+      if (err) throw err;
+
+      res.render('pages/users', {
+        users: result,
+        currentUser: currentUser // Pass the current user to EJS
+      });
+    });
+  });
 });
+
+
+
 
 //this is our login route, all it does is render the login.ejs page.
 app.get('/login', function(req, res) {
@@ -76,19 +98,12 @@ app.get('/login', function(req, res) {
 
 app.get('/profile', function(req, res) {
   if(!req.session.loggedin){res.redirect('/login');return;}
-  
-  
   var uname = req.query.username;
-  
- 
   db.collection('people').findOne({"login.username": uname}, function(err, result) {
     if (err) throw err;
-   
-
-
     res.render('pages/profile', {
       user: result
-    })
+    });
   });
 
 });
@@ -118,28 +133,79 @@ app.get('/logout', function(req, res) {
 
 //the dologin route detasl with the data from the login screen.
 //the post variables, username and password ceom from the form on the login page.
-app.post('/dologin', function(req, res) {
+/*app.post('/dologin', function(req, res) {
   console.log(JSON.stringify(req.body))
+  var uname = req.body.username;
+  var pword = req.body.password; */
+
+
+
+  /*db.collection('people').findOne({"login.username":uname}, function(err, result) {
+    if (err) throw err;
+    if(!result){res.redirect('/login');return}
+
+    if(result.login.password == pword){ req.session.loggedin = true; 
+    req.session.username = result.login.username; // add new line for updtae
+    res.redirect('/') }
+    else{res.redirect('/login')}
+  });
+});*/
+
+
+app.get('/', function(req, res) {
+  if (!req.session.loggedin) { res.redirect('/login'); return; }
+
+  db.collection('people').find().toArray(function(err, result) {
+    if (err) throw err;
+
+    db.collection('people').findOne({ "login.username": req.session.username }, function(err, currentUser) {
+      if (err) throw err;
+
+      res.render('pages/users', {
+        users: result,
+        currentUser: currentUser // 
+      });
+    });
+  });
+});
+
+
+
+app.get('/updateuser', function(req, res) {
+  if (!req.session.loggedin) { res.redirect('/login'); return; }
+
+  const uname = req.query.username;
+
+  db.collection('people').findOne({ "login.username": uname }, function(err, user) {
+    if (err) throw err;
+    if (!user) { res.redirect('/'); return; }
+
+    res.render('pages/update', { user: user });
+  });
+});
+
+
+
+
+app.post('/dologin', function(req, res) {
   var uname = req.body.username;
   var pword = req.body.password;
 
-
-
-  db.collection('people').findOne({"login.username":uname}, function(err, result) {
+  db.collection('people').findOne({ "login.username": uname }, function(err, result) {
     if (err) throw err;
+    if (!result) { res.redirect('/login'); return; }
 
-
-    if(!result){res.redirect('/login');return}
-
-
-
-    if(result.login.password == pword){ req.session.loggedin = true; res.redirect('/') }
-
-
-
-    else{res.redirect('/login')}
+    if (result.login.password === pword) {
+      req.session.loggedin = true;
+      req.session.username = result.login.username;
+      res.redirect('/');
+    } else {
+      res.redirect('/login');
+    }
   });
 });
+
+
 
 //the delete route deals with user deletion based on entering a username
 app.post('/delete', function(req, res) {
@@ -153,6 +219,7 @@ app.post('/delete', function(req, res) {
     if (err) throw err;
     //when complete redirect to the index
     res.redirect('/');
+  
   });
 });
 
@@ -195,3 +262,33 @@ var datatostore = {
     res.redirect('/')
   })
 });
+
+
+
+app.post('/doupdate', function(req, res) {
+  if (!req.session.loggedin) { res.redirect('/login'); return; }
+
+  const uname = req.body.username;
+
+  const updatedData = {
+    $set: {
+      "name": { title: req.body.title, first: req.body.first, last: req.body.last },
+      "location": { street: req.body.street, city: req.body.city, state: req.body.state, postcode: req.body.postcode },
+      "email": req.body.email,
+      "login.password": req.body.password,
+      "dob": req.body.dob,
+      "picture": {
+        large: req.body.large,
+        medium: req.body.medium,
+        thumbnail: req.body.thumbnail
+      },
+      "nat": req.body.nat
+    }
+  };
+
+  db.collection('people').updateOne({ "login.username": uname }, updatedData, function(err, result) {
+    if (err) throw err;
+    res.redirect('/');
+  });
+});
+
