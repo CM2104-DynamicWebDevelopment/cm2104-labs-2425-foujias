@@ -34,17 +34,14 @@ io.on('connection', function (socket) {
 
  // Handle chat message event from the client
  socket.on('chat message', function (msg) { 
- console.log('message: ' + msg); 
+  io.emit('chat message', msg); // Emit the message to all connected clients
+  $('#messages').append("<li>"+msg+"</li>"); 
+  window.scrollTo(0, document.body.scrollHeight); 
  }); 
 
 // Handle disconnection
  socket.on('disconnect', function () { 
  console.log('user disconnected'); 
- });
-
-// Emit the message to all connected clients
-socket.on('chat message', function (msg) { 
- io.emit('chat message', msg); 
  });
 }); 
 
