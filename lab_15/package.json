@@ -1,0 +1,24 @@
+{
+  "name": "lab_15",
+  "version": "1.0.0",
+  "description": "lab_15",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "lab_15"
+  },
+  "keywords": [
+    "lab15"
+  ],
+  "author": "foujia",
+  "license": "ISC",
+  "dependencies": {
+    "express-session": "^1.18.1",
+    "mongodb": "^6.14.2",
+    "mongodb-legacy": "^6.1.3"
+  }
+}

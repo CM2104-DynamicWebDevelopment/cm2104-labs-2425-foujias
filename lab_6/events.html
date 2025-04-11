@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Events</title>
+        <script type="text/javascript" src="js/myscript.js"></script>
+    </head>
+    <button type="button" onclick="go()">
+        Click Me Too!
+    </button>
+    <script>
+        function go(){
+            document.getElementById('id1').style.color='blue';
+        }
+    </script>
+    <body>
+        <h id="id1"> MY Heading 1 </h>
+        <button type="button" onclick="document.getElementById('id1').style.color='red';">
+            Click Me!
+        </button>
+
+        <button type="button" onclick="goAgain()">
+            Click Me for yellow!
+        </button>
+
+    </body>
+</html>

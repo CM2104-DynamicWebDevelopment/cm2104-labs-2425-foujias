@@ -1,0 +1,179 @@
+
+body {
+    width: 80%;
+    padding: 0px;
+    margin: auto;
+    border: 1px solid black;
+
+    }
+
+  #SiteLogo{
+   display: inline;
+   height: 30px;
+   width: 50px;
+   
+ }
+
+ #SiteTitle{
+    display: inline;
+    font-family: sans-serif; 
+    border: 1px dotted #000; 
+    margin-left: 200px;
+
+ }
+
+ #SiteTitle h1 {
+   padding: 50px;
+ }
+
+ nav {
+    margin: 10px 0;
+ }
+
+ nav ul {
+     list-style: none;
+     padding: 0;
+ }
+
+ nav ul li {
+    display: inline;
+    margin: 0 15px;
+
+ }
+ nav ul li a {
+       text-decoration: none;
+       color: #333;
+       font-size: 1.2rem;
+
+ }
+
+
+
+#PageHeader {
+   background-color: #f4f4f4;
+   padding: 20px;
+   flex-direction: row;
+   justify-content: space-between;
+
+}
+
+ #PageContent {
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
+   margin-top: 20px;
+
+
+}
+
+/* Main Image Section */
+
+.content { 
+   flex-direction: row;
+   justify-content: space-between;
+   margin: 20px;
+}
+
+#main-image {
+   width: 480px;
+   height: 500px;
+   padding: 5px;
+   border: 5px ;
+   margin: 5px;
+
+}
+
+#main-image img{
+   width: 100%;
+   height: auto;
+
+}
+
+#image-details {
+   margin-top: 20px;
+   margin-bottom: 20px;
+   text-align: left;
+   padding: 10px;
+   border: 1px solid #000;
+}
+
+.sidebar {
+   flex-direction: column;
+   max-width: 30%;
+   padding-left: 20px;
+
+}
+
+#thumbnails {
+    display: grid;
+    grid-area: auto;
+    grid-template-columns: repeat(3, 0.1fr);
+    /* 3 columns */
+    grid-template-rows: repeat(4, 1fr);
+    /* 4 rows */
+    grid-gap: 5px;
+    margin: 5px;
+    
+}
+#thumbnails img {
+    width: 110px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-left: 20px;
+}
+
+
+
+
+/* Comments Section */
+
+#image-comment {
+   font: 15px sans-serif;
+   background-color: #f9f9f9;
+   padding: 10px;
+   margin-top: 20px;
+   margin-left: 15px;
+   margin-right: 10px;
+   border: 1px solid #ddd;
+   text-align: left;
+   
+ }
+ 
+ #image-comment p {
+    font-size: 10px sans-serif;
+    margin-left: 10px;
+ }
+
+ #image-comments h2 {
+   font-size: 1.2rem;
+}
+
+ 
+ .image-comments p {
+      display:block;
+      border:1px solid #484848; 
+      padding: 5px;
+      margin-bottom: 10px; 
+ 
+ }
+     
+
+ #PageFooter{
+     background-color: aquamarine;
+         
+     } 
+     
+   
+/* Flexbox Layout Styling */
+.flex-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.flex-item {
+   flex: 1;
+   padding: 10px;
+}

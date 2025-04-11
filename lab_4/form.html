@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8"> 
+    <title>social 	network for cats</title>
+    <!--enter title, meta, css link here-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+     
+     <script>
+        function testResults(form){
+          // simple script to pop-up form velues after submission
+          // grab from element values and store as variables
+          var username = form.username.velue;
+          // repeat above for all the form elements used
+
+          // complete alert message popup by appending variables 
+          alert ( "You registered:" + username + ", ");
+        }
+        
+     </script>
+
+    </head>
+     <h1>Moggybook!</h1>
+     <!--complete the form-->
+
+     <form>
+       <table border="0" cellspacing="5" cellpadding="5">
+         <tr>
+            <td>Username:</td>
+            <td>
+                <input type="textarea" name="username">
+            </td>
+         </tr>
+         <!-- use table row <tr> tamplate beneath for other form elements-->
+         <tr>
+            <td> ***elemment label *** </td>
+            <td> ***elemment input *** </td>
+         </tr> 
+       </table>
+       <input type="submit" name="submit" value="submit" onclick="testResults
+       (this.form)"/>
+     </form>
+    <body>
+
+    </body>
+
+
+
+</html>
